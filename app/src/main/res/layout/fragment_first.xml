@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,25 +9,80 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp">
-        <Button
-                android:id="@+id/button_first"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/next"
-                app:layout_constraintBottom_toTopOf="@id/textview_first"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" tools:ignore="MissingConstraints">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="上传目录"
+                        android:ems="10"
+                        android:id="@+id/et_dataDir" tools:layout_editor_absoluteY="260dp"
+                        tools:layout_editor_absoluteX="109dp" android:minHeight="48dp"/>
+                <Button
+                        android:text="..."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/btn_file"
+                        tools:layout_editor_absoluteY="9dp"
+                        tools:layout_editor_absoluteX="296dp"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="账号"
+                        android:ems="10"
+                        android:id="@+id/et_username"
+                        tools:layout_editor_absoluteY="89dp" tools:layout_editor_absoluteX="112dp"
+                        android:minHeight="48dp"/>
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="密码"
+                        android:ems="10"
+                        android:id="@+id/et_password" tools:layout_editor_absoluteY="108dp"
+                        tools:layout_editor_absoluteX="60dp"/>
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="端口"
+                        android:ems="10"
+                        android:id="@+id/et_port" tools:layout_editor_absoluteY="185dp"
+                        tools:layout_editor_absoluteX="100dp"/>
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="UTF-8"
+                        android:hint="编码"
+                        android:ems="10"
+                        android:id="@+id/et_encoding" tools:layout_editor_absoluteY="230dp"
+                        tools:layout_editor_absoluteX="60dp"/>
 
-        <TextView
-                android:id="@+id/textview_first"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/lorem_ipsum"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/button_first" app:layout_constraintHorizontal_bias="0.0"/>
+                <Button
+                        android:text="启动"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/start"
+                        tools:layout_editor_absoluteY="299dp"
+                        tools:layout_editor_absoluteX="70dp"/>
+                <TextView
+                        android:text="未启用"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/tv_tooltip"/>
+            </LinearLayout>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -17,4 +17,5 @@ public class FtpProperties {
     private String remoteDirectory; // 远程目录，可选
 
     private String encoding; // 字符编码
+
 }
