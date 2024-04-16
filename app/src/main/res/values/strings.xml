@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">FTP-Server</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">设置</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="ftp_fragment_label">FTP-Server</string>
+    <string name="menu_fragment_label">菜单</string>
     <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="previous">返回</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id
@@ -37,4 +37,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus vestibulum. Fusce
         dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

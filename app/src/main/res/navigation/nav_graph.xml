@@ -3,26 +3,24 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph"
-            app:startDestination="@id/FirstFragment">
-
+            app:startDestination="@id/menu">
     <fragment
-            android:id="@+id/FirstFragment"
-            android:name="top.aenlly.ftp_server.FirstFragment"
-            android:label="@string/first_fragment_label"
-            tools:layout="@layout/fragment_first">
-
+            android:id="@+id/menu"
+            android:name="top.aenlly.ftp_server.MenuFragment"
+            android:label="@string/menu_fragment_label"
+            tools:layout="@layout/fragment_menu">
         <action
-                android:id="@+id/action_FirstFragment_to_SecondFragment"
-                app:destination="@id/SecondFragment"/>
+                android:id="@+id/tv_ftpServer"
+                app:destination="@id/FirstFragment"/>
     </fragment>
     <fragment
-            android:id="@+id/SecondFragment"
-            android:name="top.aenlly.ftp_server.SecondFragment"
-            android:label="@string/second_fragment_label"
-            tools:layout="@layout/fragment_second">
+            android:id="@+id/FirstFragment"
+            android:name="top.aenlly.ftp_server.FtpServerFragment"
+            android:label="@string/ftp_fragment_label"
+            tools:layout="@layout/fragment_ftp_server">
 
         <action
-                android:id="@+id/action_SecondFragment_to_FirstFragment"
-                app:destination="@id/FirstFragment"/>
+                android:id="@id/nav_graph"
+                app:destination="@id/menu"/>
     </fragment>
 </navigation>

@@ -4,7 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FirstFragment">
+        tools:context=".FtpServerFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -12,41 +13,41 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" tools:ignore="MissingConstraints">
+                android:layout_height="fill_parent"
+                tools:ignore="MissingConstraints">
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="wrap_content">
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="上传目录"
                         android:ems="10"
-                        android:id="@+id/et_dataDir" tools:layout_editor_absoluteY="260dp"
-                        tools:layout_editor_absoluteX="109dp" android:minHeight="48dp"/>
-                <Button
-                        android:text="..."
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/btn_file"
-                        tools:layout_editor_absoluteY="9dp"
-                        tools:layout_editor_absoluteX="296dp"/>
+                        android:id="@+id/et_dataDir"
+                        tools:layout_editor_absoluteY="260dp"
+                        tools:layout_editor_absoluteX="109dp"
+                />
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:hint="账号"
                         android:ems="10"
                         android:id="@+id/et_username"
-                        tools:layout_editor_absoluteY="89dp" tools:layout_editor_absoluteX="112dp"
+                        tools:layout_editor_absoluteY="89dp"
+                        tools:layout_editor_absoluteX="112dp"
                         android:minHeight="48dp"/>
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:hint="密码"
@@ -54,7 +55,7 @@
                         android:id="@+id/et_password" tools:layout_editor_absoluteY="108dp"
                         tools:layout_editor_absoluteX="60dp"/>
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:hint="端口"
@@ -62,27 +63,47 @@
                         android:id="@+id/et_port" tools:layout_editor_absoluteY="185dp"
                         tools:layout_editor_absoluteX="100dp"/>
                 <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:text="UTF-8"
                         android:hint="编码"
                         android:ems="10"
-                        android:id="@+id/et_encoding" tools:layout_editor_absoluteY="230dp"
+                        android:id="@+id/et_encoding"
+                        tools:layout_editor_absoluteY="230dp"
                         tools:layout_editor_absoluteX="60dp"/>
 
                 <Button
                         android:text="启动"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/start"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_start"
+                        android:backgroundTint="@color/blue"
+                        tools:layout_editor_absoluteY="299dp"
+                        tools:layout_editor_absoluteX="70dp"/>
+                <Button
+                        android:text="停止"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_stop"
+                        android:backgroundTint="@color/red"
                         tools:layout_editor_absoluteY="299dp"
                         tools:layout_editor_absoluteX="70dp"/>
                 <TextView
                         android:text="未启用"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/tv_tooltip"/>
+                        android:layout_height="wrap_content"
+                        android:gravity="center|center_horizontal"
+                        android:id="@+id/tv_tooltip"/>
             </LinearLayout>
-
+            <TextView
+                    android:text="需要开启热点使用"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:textColor="@color/red"
+                    android:id="@+id/tv_author"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

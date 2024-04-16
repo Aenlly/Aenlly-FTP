@@ -1,5 +1,6 @@
 package top.aenlly.ftp_server;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +27,7 @@ import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.ftpserver.usermanager.impl.WriteRequest;
 import top.aenlly.ftp_server.cache.SharedPreferencesUtils;
 import top.aenlly.ftp_server.constant.FtpConstant;
-import top.aenlly.ftp_server.databinding.FragmentFirstBinding;
+import top.aenlly.ftp_server.databinding.FragmentFtpServerBinding;
 import top.aenlly.ftp_server.properties.FtpProperties;
 
 import java.io.File;
@@ -36,9 +37,14 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.LinkedList;
 
-public class FirstFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link FtpServerFragment} factory method to
+ * create an instance of this fragment.
+ */
+public class FtpServerFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private FragmentFtpServerBinding binding;
 
     private FtpProperties ftpProperties;
 
@@ -54,7 +60,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentFtpServerBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -69,30 +75,32 @@ public class FirstFragment extends Fragment {
     }
 
     void registerForBtn() {
-        binding.btnFile.setOnClickListener(view1 -> {
+        binding.etDataDir.setOnClickListener(view1 -> {
             // 启动Activity并处理结果
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
             launcher.launch(intent);
         });
 
-        binding.start.setOnClickListener(view1 -> {
+        binding.btnStart.setOnClickListener(view1 -> {
             try {
-                if (binding.start.getText().toString().equals("启动")) {
                     initProp();
                     startFtp();
-                    return;
-                }
-                server.stop();
-                binding.start.setText("启动");
-                binding.tvTooltip.setText("未启动");
-
             } catch (FtpException e) {
                 throw new RuntimeException(e);
             }
         });
+
+        binding.btnStop.setOnClickListener(view1->{
+            server.stop();
+            binding.tvTooltip.setText("未启用");
+            binding.btnStart.setVisibility(View.VISIBLE);
+            binding.btnStop.setVisibility(View.GONE);
+        });
     }
 
-
+    /**
+     * 注册查看活动结果
+     */
     void registerForActivityResult() {
         // 在Activity中定义一个ActivityResultLauncher
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -116,6 +124,7 @@ public class FirstFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void startFtp() throws FtpException {
         FtpServerFactory serverFactory = new FtpServerFactory();
         // 设置用户管理器
@@ -148,7 +157,8 @@ public class FirstFragment extends Fragment {
         try {
             server.start();
             binding.tvTooltip.setText("已启用:" + ftpProperties.getHost() + ":" + ftpProperties.getPort());
-            binding.start.setText("停止");
+            binding.btnStart.setVisibility(View.GONE);
+            binding.btnStop.setVisibility(View.VISIBLE);
         } catch (Exception e) {
             binding.tvTooltip.setText("启动失败：" + e.getMessage());
         }
@@ -163,6 +173,7 @@ public class FirstFragment extends Fragment {
                 while (enumInetAddress.hasMoreElements()) {
                     InetAddress inetAddress = enumInetAddress.nextElement();
                     if (!inetAddress.isLoopbackAddress() && inetAddress.getAddress().length == 4 && inetAddress.toString().contains("192.168")) {
+                        binding.btnStart.setClickable(true);
                         // 找到了IPv4地址
                         return inetAddress.getHostAddress();
                     }
@@ -172,14 +183,6 @@ public class FirstFragment extends Fragment {
             ex.printStackTrace();
         }
         return null;
-    }
-
-    // 格式化 IP 地址
-    private String formatIpAddress(int ipAddress) {
-        return ((ipAddress & 0xFF) + "." +
-                ((ipAddress >> 8) & 0xFF) + "." +
-                ((ipAddress >> 16) & 0xFF) + "." +
-                ((ipAddress >> 24) & 0xFF));
     }
 
     /**
@@ -196,7 +199,9 @@ public class FirstFragment extends Fragment {
         flushedCache();
     }
 
+    @SuppressLint("ResourceAsColor")
     void bindCache(){
+        binding.btnStart.setBackgroundColor(R.color.blue);
         binding.etPort.setText(SharedPreferencesUtils.getString(FtpConstant.PORT));
         binding.etDataDir.setText(SharedPreferencesUtils.getString(FtpConstant.REMOTE_DIRECTORY));
         binding.etUsername.setText(SharedPreferencesUtils.getString(FtpConstant.USER_NAME));
