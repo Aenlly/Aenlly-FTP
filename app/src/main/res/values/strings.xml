@@ -39,4 +39,14 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">FTP-Server</string>
+    <string name="nav_header_email">aenlly123@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_ftp_server">FTP-SERVER</string>
+    <string name="menu_about">关于</string>
+
 </resources>

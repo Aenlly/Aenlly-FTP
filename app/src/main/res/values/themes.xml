@@ -6,5 +6,11 @@
     </style>
 
     <style name="Theme.FTPServer" parent="Base.Theme.FTPServer"/>
+    <style name="Theme.FTPServer.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.FTPServer.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.FTPServer.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

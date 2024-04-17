@@ -1,4 +1,4 @@
-package top.aenlly.ftp_server;
+package top.aenlly.ftp_server.ui.ftpserver;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,9 +25,10 @@ import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.ftpserver.usermanager.impl.WriteRequest;
+import top.aenlly.ftp_server.R;
 import top.aenlly.ftp_server.cache.SharedPreferencesUtils;
 import top.aenlly.ftp_server.constant.FtpConstant;
-import top.aenlly.ftp_server.databinding.FragmentFtpServerBinding;
+import top.aenlly.ftp_server.databinding.FragmentFtpserverBinding;
 import top.aenlly.ftp_server.properties.FtpProperties;
 
 import java.io.File;
@@ -37,14 +38,7 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.LinkedList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FtpServerFragment} factory method to
- * create an instance of this fragment.
- */
 public class FtpServerFragment extends Fragment {
-
-    private FragmentFtpServerBinding binding;
 
     private FtpProperties ftpProperties;
 
@@ -52,17 +46,22 @@ public class FtpServerFragment extends Fragment {
 
     ActivityResultLauncher<Intent> launcher;
 
+    private FragmentFtpserverBinding binding;
+
     private Context context;
 
-    @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+            ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentFtpServerBinding.inflate(inflater, container, false);
+        binding = FragmentFtpserverBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -74,6 +73,7 @@ public class FtpServerFragment extends Fragment {
         registerForBtn();
     }
 
+
     void registerForBtn() {
         binding.etDataDir.setOnClickListener(view1 -> {
             // 启动Activity并处理结果
@@ -83,8 +83,8 @@ public class FtpServerFragment extends Fragment {
 
         binding.btnStart.setOnClickListener(view1 -> {
             try {
-                    initProp();
-                    startFtp();
+                initProp();
+                startFtp();
             } catch (FtpException e) {
                 throw new RuntimeException(e);
             }
@@ -97,6 +97,7 @@ public class FtpServerFragment extends Fragment {
             binding.btnStop.setVisibility(View.GONE);
         });
     }
+
 
     /**
      * 注册查看活动结果
@@ -119,10 +120,6 @@ public class FtpServerFragment extends Fragment {
                 });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 
     @SuppressLint("ResourceAsColor")
     private void startFtp() throws FtpException {
