@@ -3,13 +3,17 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mobile_navigation"
-            app:startDestination="@+id/nav_home">
+            app:startDestination="@+id/nav_ftp_server">
 
     <!-- 导航栏与这个相关连 -->
     <fragment
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_ftp_server"
             android:name="top.aenlly.ftp_server.ui.ftpserver.FtpServerFragment"
             android:label="@string/menu_ftp_server"
-            tools:layout="@layout/fragment_ftpserver"/>
-
+            tools:layout="@layout/fragment_ftp_server"/>
+    <fragment
+            android:id="@+id/nav_ftp_client"
+            android:name="top.aenlly.ftp_server.ui.ftpclient.FtpClientFragment"
+            android:label="@string/menu_ftp_server"
+            tools:layout="@layout/fragment_ftp_client"/>
 </navigation>

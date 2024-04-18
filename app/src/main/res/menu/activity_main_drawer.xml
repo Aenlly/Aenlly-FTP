@@ -5,9 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_home"
+                android:id="@+id/nav_ftp_server"
                 android:icon="@drawable/side_nav_bar"
                 android:title="@string/menu_ftp_server"/>
+        <item
+                android:id="@+id/nav_ftp_client"
+                android:icon="@drawable/side_nav_bar"
+                android:title="@string/menu_ftp_client"/>
         <item
                 android:id="@+id/nav_gallery"
                 android:icon="@drawable/side_nav_bar"

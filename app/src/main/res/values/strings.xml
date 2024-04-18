@@ -2,8 +2,6 @@
     <string name="app_name">FTP-Server</string>
     <string name="action_settings">设置</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="ftp_fragment_label">FTP-Server</string>
-    <string name="menu_fragment_label">菜单</string>
     <string name="next">Next</string>
     <string name="previous">返回</string>
 
@@ -39,14 +37,13 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">MainActivity2</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main">MainActivity</string>
     <string name="nav_header_title">FTP-Server</string>
     <string name="nav_header_email">aenlly123@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
-    <string name="menu_ftp_server">FTP-SERVER</string>
+    <string name="menu_ftp_server">FTP-Server</string>
+    <string name="menu_ftp_client">FTP-Client</string>
     <string name="menu_about">关于</string>
 
 </resources>
