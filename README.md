@@ -31,7 +31,7 @@ A simple android FTP tool, built using java Support android to enable FTP server
 # Suggestion
 
 1. [GitHub](https://github.com/Aenlly/FTP-Server/issues)
-2. [aenlly123@gmail.com](aenlly123@gmail.com)
+2. [aenlly123@gmail.com](mailto:aenlly123@gmail.com)
 
 ## License
 
