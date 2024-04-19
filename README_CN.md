@@ -29,7 +29,7 @@
 # 建议/反馈
 
 1. [GitHub](https://github.com/Aenlly/FTP-Server/issues)
-2. [aenlly123@gmail.com](aenlly123@gmail.com)
+2. [aenlly123@gmail.com](mailto:aenlly123@gmail.com)
 
 ## 许可证
 
