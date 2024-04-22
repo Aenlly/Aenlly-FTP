@@ -20,45 +20,85 @@
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="请选择上传目录"
-                        android:ems="10"
-                        android:id="@+id/et_dataDir"
-                        android:importantForAccessibility="yes"
-                        tools:layout_editor_absoluteY="260dp"
-                        tools:layout_editor_absoluteX="109dp"
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="启动配置"
                 />
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:hint="请填写账号"
-                        android:ems="10"
-                        android:id="@+id/et_username"
-                        tools:layout_editor_absoluteY="89dp"
-                        tools:layout_editor_absoluteX="112dp"
-                        android:minHeight="48dp"/>
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:hint="请填写密码"
-                        android:ems="10"
-                        android:id="@+id/et_password" tools:layout_editor_absoluteY="108dp"
-                        tools:layout_editor_absoluteX="60dp"/>
-                <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:hint="端口"
-                        android:ems="10"
-                        android:id="@+id/et_port" tools:layout_editor_absoluteY="185dp"
-                        tools:layout_editor_absoluteX="100dp"/>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="上传目录:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="请选择上传目录"
+                            android:ems="10"
+                            android:id="@+id/et_dataDir"
+                            android:importantForAccessibility="yes"
+                            tools:layout_editor_absoluteY="260dp"
+                            tools:layout_editor_absoluteX="109dp"
+                    />
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="账号:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:hint="请填写账号"
+                            android:ems="10"
+                            android:id="@+id/et_username"
+                            tools:layout_editor_absoluteY="89dp"
+                            tools:layout_editor_absoluteX="112dp"
+                            android:minHeight="48dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="密码:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:hint="请填写密码"
+                            android:ems="10"
+                            android:id="@+id/et_password" tools:layout_editor_absoluteY="108dp"
+                            tools:layout_editor_absoluteX="60dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="端口:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:hint="端口"
+                            android:ems="10"
+                            android:id="@+id/et_port" tools:layout_editor_absoluteY="185dp"
+                            tools:layout_editor_absoluteX="100dp"/>
+                </LinearLayout>
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -71,6 +111,68 @@
                         tools:layout_editor_absoluteY="230dp"
                         tools:layout_editor_absoluteX="60dp"/>
 
+                <RadioGroup android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:id="@+id/rdgrp_state">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="压缩配置:"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_false"
+                                 android:text="关闭"
+                                 android:checked="true"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_true"
+                                 android:text="启用"
+                    />
+                </RadioGroup>
+                <RadioGroup android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:id="@+id/rdgrp_thumb_state">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="略缩图显示:"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_thumb_false"
+                                 android:text="否"
+                                 android:checked="true"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_thumb_true"
+                                 android:text="是"
+                    />
+                </RadioGroup>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="压缩目录:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="请选择压缩存储目录"
+                            android:ems="10"
+                            android:id="@+id/et_compressDir"
+                            android:importantForAccessibility="yes"
+                            tools:layout_editor_absoluteY="260dp"
+                            tools:layout_editor_absoluteX="109dp"
+                    />
+                </LinearLayout>
                 <Button
                         android:text="启动"
                         android:layout_width="wrap_content"
@@ -78,6 +180,7 @@
                         android:id="@+id/btn_start"
                         android:backgroundTint="@color/blue"
                         tools:layout_editor_absoluteY="299dp"
+                        android:layout_gravity="bottom|center"
                         tools:layout_editor_absoluteX="70dp"/>
                 <Button
                         android:text="停止"
@@ -87,6 +190,7 @@
                         android:id="@+id/btn_stop"
                         android:backgroundTint="@color/red"
                         tools:layout_editor_absoluteY="299dp"
+                        android:layout_gravity="bottom|center"
                         tools:layout_editor_absoluteX="70dp"/>
                 <TextView
                         android:text="未启用"

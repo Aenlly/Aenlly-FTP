@@ -70,7 +70,7 @@ public class FtpServerService extends Service {
         BaseUser user = new BaseUser();
         user.setName(FtpProperties.username);
         user.setPassword(FtpProperties.password);
-        user.setHomeDirectory(FtpProperties.remoteDirectory);
+        user.setHomeDirectory(FtpProperties.remoteDir);
         user.authorize(new WriteRequest());
         LinkedList<Authority> authorities = new LinkedList<>();
         authorities.add(new WritePermission());

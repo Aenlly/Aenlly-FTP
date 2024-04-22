@@ -11,9 +11,10 @@ android {
         minSdk 26
         targetSdk 34
         versionCode 1
-        versionName "1.0.4"
+        versionName "1.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -56,4 +57,6 @@ dependencies {
 
     // 日志
     compileOnly 'log4j:log4j:1.2.12'
+    // 图片压缩
+    implementation 'com.github.Curzibn:Luban:1.1.8'
 }

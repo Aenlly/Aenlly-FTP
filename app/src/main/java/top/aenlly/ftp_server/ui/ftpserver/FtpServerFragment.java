@@ -20,10 +20,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import top.aenlly.ftp_server.R;
-import top.aenlly.ftp_server.cache.SharedPreferencesUtils;
 import top.aenlly.ftp_server.constant.FtpConstant;
 import top.aenlly.ftp_server.databinding.FragmentFtpServerBinding;
 import top.aenlly.ftp_server.properties.FtpProperties;
+import top.aenlly.ftp_server.utils.cache.SharedPreferencesUtils;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -34,7 +34,9 @@ import java.util.Enumeration;
 public class FtpServerFragment extends Fragment {
 
 
-    private ActivityResultLauncher<Intent> launcher;
+    private ActivityResultLauncher<Intent> uploadLauncher;
+
+    private ActivityResultLauncher<Intent> compressLauncher;
 
     private FragmentFtpServerBinding binding;
 
@@ -92,19 +94,25 @@ public class FtpServerFragment extends Fragment {
         binding.etDataDir.setOnClickListener(view1 -> {
             // 启动Activity并处理结果
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-            launcher.launch(intent);
+            uploadLauncher.launch(intent);
         });
-        Intent intent = new Intent(context, FtpServerService.class);
+        binding.etCompressDir.setOnClickListener(view1 -> {
+            // 启动Activity并处理结果
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            compressLauncher.launch(intent);
+        });
+
+        Intent ftpIntent = new Intent(context, FtpServerService.class);
         binding.btnStart.setOnClickListener(view1 -> {
             initProperties();
             if (!verifyParameter()) {
                 return;
             }
-            context.startService(intent);
+            context.startService(ftpIntent);
         });
 
         binding.btnStop.setOnClickListener(view1 -> {
-            context.stopService(intent);
+            context.stopService(ftpIntent);
             binding.tvTooltip.setText("未启用");
             binding.btnStart.setVisibility(View.VISIBLE);
             binding.btnStop.setVisibility(View.GONE);
@@ -117,7 +125,7 @@ public class FtpServerFragment extends Fragment {
      */
     void registerForActivityResult() {
         // 在Activity中定义一个ActivityResultLauncher
-        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+        uploadLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Uri treeUri = null;
@@ -129,6 +137,20 @@ public class FtpServerFragment extends Fragment {
                         directoryPath = directoryPath.replace("/tree/primary:", directory.getAbsolutePath() + "/");
                         // 将路径显示在EditText中或者做其他操作
                         binding.etDataDir.setText(directoryPath);
+                    }
+                });
+        compressLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Uri treeUri = null;
+                        if (result.getData() != null) {
+                            treeUri = result.getData().getData();
+                        }
+                        File directory = Environment.getExternalStorageDirectory();
+                        String directoryPath = treeUri.getPath(); // 这是选定的文件目录路径
+                        directoryPath = directoryPath.replace("/tree/primary:", directory.getAbsolutePath() + "/");
+                        // 将路径显示在EditText中或者做其他操作
+                        binding.etCompressDir.setText(directoryPath);
                     }
                 });
     }
@@ -168,9 +190,12 @@ public class FtpServerFragment extends Fragment {
         FtpProperties.username = binding.etUsername.getText().toString();
         FtpProperties.password = binding.etPassword.getText().toString();
         FtpProperties.port = Integer.parseInt(binding.etPort.getText().toString());
-        FtpProperties.remoteDirectory = binding.etDataDir.getText().toString();
+        FtpProperties.remoteDir = binding.etDataDir.getText().toString();
         FtpProperties.encoding = binding.etEncoding.getText().toString();
         FtpProperties.host = getLocalIpAddress();
+        FtpProperties.compressDir=binding.etCompressDir.getText().toString();
+        FtpProperties.compressState=binding.rdgrpState.getCheckedRadioButtonId()== R.id.rdbtn_true;
+        FtpProperties.compressThumbState=binding.rdgrpThumbState.getCheckedRadioButtonId()== R.id.rdbtn_thumb_true;
         flushedCache();
     }
 
@@ -181,10 +206,13 @@ public class FtpServerFragment extends Fragment {
     void bindCache() {
         binding.btnStart.setBackgroundColor(R.color.blue);
         binding.etPort.setText(SharedPreferencesUtils.getString(FtpConstant.PORT));
-        binding.etDataDir.setText(SharedPreferencesUtils.getString(FtpConstant.REMOTE_DIRECTORY));
+        binding.etDataDir.setText(SharedPreferencesUtils.getString(FtpConstant.UPLOAD_DIR));
         binding.etUsername.setText(SharedPreferencesUtils.getString(FtpConstant.USER_NAME));
         binding.etPassword.setText(SharedPreferencesUtils.getString(FtpConstant.PASSWORD));
         binding.etEncoding.setText(SharedPreferencesUtils.getString(FtpConstant.ENCODING));
+        binding.etCompressDir.setText(SharedPreferencesUtils.getString(FtpConstant.COMPRESS_DIR));
+        binding.rdgrpState.check(SharedPreferencesUtils.getBoolean(FtpConstant.COMPRESS_STATE)?R.id.rdbtn_true:R.id.rdbtn_false);
+        binding.rdgrpThumbState.check(SharedPreferencesUtils.getBoolean(FtpConstant.COMPRESS_THUMB_STATE)?R.id.rdbtn_thumb_true:R.id.rdbtn_thumb_false);
     }
 
     /**
@@ -192,10 +220,13 @@ public class FtpServerFragment extends Fragment {
      */
     void flushedCache() {
         SharedPreferencesUtils.putString(FtpConstant.PORT, binding.etPort.getText().toString());
-        SharedPreferencesUtils.putString(FtpConstant.REMOTE_DIRECTORY, binding.etDataDir.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.UPLOAD_DIR, binding.etDataDir.getText().toString());
         SharedPreferencesUtils.putString(FtpConstant.USER_NAME, binding.etUsername.getText().toString());
         SharedPreferencesUtils.putString(FtpConstant.PASSWORD, binding.etPassword.getText().toString());
         SharedPreferencesUtils.putString(FtpConstant.ENCODING, binding.etEncoding.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.COMPRESS_DIR, binding.etCompressDir.getText().toString());
+        SharedPreferencesUtils.putBoolean(FtpConstant.COMPRESS_STATE, binding.rdgrpState.getCheckedRadioButtonId()== R.id.rdbtn_true);
+        SharedPreferencesUtils.putBoolean(FtpConstant.COMPRESS_THUMB_STATE, binding.rdgrpThumbState.getCheckedRadioButtonId()== R.id.rdbtn_thumb_true);
     }
 
     boolean verifyParameter() {
@@ -221,6 +252,10 @@ public class FtpServerFragment extends Fragment {
         }
         if (FtpProperties.host == null) {
             Toast.makeText(context, "请先打开热点！", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(FtpProperties.compressState&&FtpProperties.compressDir.isEmpty()){
+            binding.etEncoding.setError("压缩存储目录不能为空！");
             return false;
         }
         return true;

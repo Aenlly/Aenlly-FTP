@@ -1,4 +1,4 @@
-package top.aenlly.ftp_server.cache;
+package top.aenlly.ftp_server.utils.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,12 +28,21 @@ public class SharedPreferencesUtils {
         editor.apply(); // 保存数据
     }
 
+    public static void putBoolean(String key,boolean value) {
+        editor.putBoolean(key, value);
+        editor.apply(); // 保存数据
+    }
+
     public static String getString(String key){
         return sharedPreferences.getString(key,"");
     }
 
     public static int getInt(String key){
         return sharedPreferences.getInt(key,0);
+    }
+
+    public static boolean getBoolean(String key){
+        return sharedPreferences.getBoolean(key,false);
     }
 
     public static void clearData() {
