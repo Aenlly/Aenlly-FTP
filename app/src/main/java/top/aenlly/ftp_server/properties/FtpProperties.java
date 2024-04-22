@@ -10,12 +10,12 @@ import lombok.Data;
 @Data
 public class FtpProperties {
 
-    private String host;
-    private int port;
-    private String username;
-    private String password;
-    private String remoteDirectory; // 远程目录，可选
+    public static String host;
+    public static int port;
+    public static String username;
+    public static String password;
+    public static String remoteDirectory; // 远程目录，可选
 
-    private String encoding; // 字符编码
+    public static String encoding; // 字符编码
 
 }

@@ -17,23 +17,6 @@
                 android:layout_height="fill_parent"
                 tools:ignore="MissingConstraints">
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-                <EditText
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="上传目录"
-                        android:ems="10"
-                        android:id="@+id/et_dataDir"
-                        tools:layout_editor_absoluteY="260dp"
-                        tools:layout_editor_absoluteX="109dp"
-                />
-            </LinearLayout>
-            <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
@@ -41,7 +24,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:hint="账号"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="请选择上传目录"
+                        android:ems="10"
+                        android:id="@+id/et_dataDir"
+                        android:importantForAccessibility="yes"
+                        tools:layout_editor_absoluteY="260dp"
+                        tools:layout_editor_absoluteX="109dp"
+                />
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="请填写账号"
                         android:ems="10"
                         android:id="@+id/et_username"
                         tools:layout_editor_absoluteY="89dp"
@@ -51,7 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
-                        android:hint="密码"
+                        android:hint="请填写密码"
                         android:ems="10"
                         android:id="@+id/et_password" tools:layout_editor_absoluteY="108dp"
                         tools:layout_editor_absoluteX="60dp"/>
@@ -71,6 +67,7 @@
                         android:hint="编码"
                         android:ems="10"
                         android:id="@+id/et_encoding"
+                        android:visibility="gone"
                         tools:layout_editor_absoluteY="230dp"
                         tools:layout_editor_absoluteX="60dp"/>
 

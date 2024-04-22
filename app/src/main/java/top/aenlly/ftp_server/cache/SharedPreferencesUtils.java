@@ -2,7 +2,6 @@ package top.aenlly.ftp_server.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import top.aenlly.ftp_server.constant.FtpConstant;
 
 public class SharedPreferencesUtils {
 
@@ -15,11 +14,8 @@ public class SharedPreferencesUtils {
     }
 
     public static void init(Context context) {
-
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        SharedPreferencesUtils.putString(FtpConstant.ENCODING, "UTF-8");
-        SharedPreferencesUtils.putString(FtpConstant.PORT, "2121");
     }
 
     public static void putString(String key,String value) {
