@@ -19,4 +19,5 @@ public class FtpProperties {
     public static boolean compressState; // 压缩状态，是否启用
     public static boolean compressThumbState; // 略缩图状态，是否启用
     public static String encoding; // 字符编码
+    public static String[] imageFormat; // 压缩匹配格式
 }

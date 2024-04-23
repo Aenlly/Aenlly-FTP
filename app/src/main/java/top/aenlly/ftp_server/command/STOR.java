@@ -2,6 +2,7 @@ package top.aenlly.ftp_server.command;
 
 import android.content.Context;
 import android.media.MediaScannerConnection;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.ftplet.FtpRequest;
 import org.apache.ftpserver.impl.FtpIoSession;
@@ -12,8 +13,7 @@ import top.aenlly.ftp_server.utils.images.ImageUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * 重写默认的STOR方法，接收ftp客户端传过来的数据，执行实现自己所需的后处理
@@ -22,7 +22,7 @@ import java.util.List;
  * @create 2024/04/18 11:46
  * @since 1.0.0
  */
-
+@Slf4j
 public class STOR extends org.apache.ftpserver.command.impl.STOR {
 
     private Context context;
@@ -43,12 +43,10 @@ public class STOR extends org.apache.ftpserver.command.impl.STOR {
                 new String[]{absolutePath},
                 FtpConstant.FILE_FORMATS,
                 (path, uri) -> {});
-        //
-        if(FtpProperties.compressState) {
-            List<File> files=new ArrayList<>();
-            files.add(file);
+        if (FtpProperties.compressState && FtpProperties.imageFormat !=null && Arrays.stream(FtpProperties.imageFormat)
+                .anyMatch(absolutePath::endsWith)) {
             // 压缩图片
-            ImageUtils.syncCompress(this.context, files, FtpProperties.compressDir, new ImageUtils.DefaultOnCompressListener(this.context));
+            ImageUtils.syncCompress(this.context, file, FtpProperties.compressDir, new ImageUtils.DefaultOnCompressListener(this.context));
         }
     }
 }

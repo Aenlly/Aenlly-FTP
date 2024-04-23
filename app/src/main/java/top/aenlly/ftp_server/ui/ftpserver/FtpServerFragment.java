@@ -196,6 +196,8 @@ public class FtpServerFragment extends Fragment {
         FtpProperties.compressDir=binding.etCompressDir.getText().toString();
         FtpProperties.compressState=binding.rdgrpState.getCheckedRadioButtonId()== R.id.rdbtn_true;
         FtpProperties.compressThumbState=binding.rdgrpThumbState.getCheckedRadioButtonId()== R.id.rdbtn_thumb_true;
+        String[] format = binding.etImageFormat.getText().toString().split(",");
+        FtpProperties.imageFormat= format.length!= 0 && !binding.etImageFormat.getText().toString().isEmpty() ? format:null;
         flushedCache();
     }
 
@@ -213,6 +215,7 @@ public class FtpServerFragment extends Fragment {
         binding.etCompressDir.setText(SharedPreferencesUtils.getString(FtpConstant.COMPRESS_DIR));
         binding.rdgrpState.check(SharedPreferencesUtils.getBoolean(FtpConstant.COMPRESS_STATE)?R.id.rdbtn_true:R.id.rdbtn_false);
         binding.rdgrpThumbState.check(SharedPreferencesUtils.getBoolean(FtpConstant.COMPRESS_THUMB_STATE)?R.id.rdbtn_thumb_true:R.id.rdbtn_thumb_false);
+        binding.etImageFormat.setText(SharedPreferencesUtils.getString(FtpConstant.IMAGE_FORMAT));
     }
 
     /**
@@ -227,6 +230,7 @@ public class FtpServerFragment extends Fragment {
         SharedPreferencesUtils.putString(FtpConstant.COMPRESS_DIR, binding.etCompressDir.getText().toString());
         SharedPreferencesUtils.putBoolean(FtpConstant.COMPRESS_STATE, binding.rdgrpState.getCheckedRadioButtonId()== R.id.rdbtn_true);
         SharedPreferencesUtils.putBoolean(FtpConstant.COMPRESS_THUMB_STATE, binding.rdgrpThumbState.getCheckedRadioButtonId()== R.id.rdbtn_thumb_true);
+        SharedPreferencesUtils.putString(FtpConstant.IMAGE_FORMAT, binding.etImageFormat.getText().toString());
     }
 
     boolean verifyParameter() {

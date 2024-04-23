@@ -19,6 +19,7 @@ public interface FtpConstant {
     String COMPRESS_STATE = "compress_state";
     String COMPRESS_THUMB_STATE = "compress_thumb_state";
     String ENCODING = "encoding";
+    String IMAGE_FORMAT = "image_format";
 
     String[] IMAGE_FORMATS = {"image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp", "image/tiff", "image/svg+xml", "image/x-adobe-dng", "image/x-canon-cr2", "image/x-nikon-nef", "image/x-sony-arw"};
 
