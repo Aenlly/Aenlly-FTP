@@ -19,13 +19,13 @@
             android:theme="@style/Theme.FTPServer"
             tools:targetApi="31">
         <service
-                android:name=".ui.ftpserver.FtpServerService"
+                android:name="top.aenlly.ftp.ui.ftpserver.FtpServerService"
                 android:enabled="true"
                 android:exported="true">
         </service>
 
         <activity
-                android:name=".MainActivity"
+                android:name="top.aenlly.ftp.MainActivity"
                 android:exported="true"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.FTPServer.NoActionBar">

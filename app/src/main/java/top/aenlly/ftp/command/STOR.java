@@ -1,4 +1,4 @@
-package top.aenlly.ftp_server.command;
+package top.aenlly.ftp.command;
 
 import android.content.Context;
 import android.media.MediaScannerConnection;
@@ -7,9 +7,9 @@ import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.ftplet.FtpRequest;
 import org.apache.ftpserver.impl.FtpIoSession;
 import org.apache.ftpserver.impl.FtpServerContext;
-import top.aenlly.ftp_server.constant.FtpConstant;
-import top.aenlly.ftp_server.properties.FtpProperties;
-import top.aenlly.ftp_server.utils.images.ImageUtils;
+import top.aenlly.ftp.constant.FtpConstant;
+import top.aenlly.ftp.properties.FtpProperties;
+import top.aenlly.ftp.utils.images.ImageUtils;
 
 import java.io.File;
 import java.io.IOException;

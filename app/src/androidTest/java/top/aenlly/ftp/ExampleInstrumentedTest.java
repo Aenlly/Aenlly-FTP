@@ -1,4 +1,4 @@
-package top.aenlly.ftp_server;
+package top.aenlly.ftp;
 
 import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;

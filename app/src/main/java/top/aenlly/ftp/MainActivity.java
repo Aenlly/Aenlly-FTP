@@ -1,4 +1,4 @@
-package top.aenlly.ftp_server;
+package top.aenlly.ftp;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
-import top.aenlly.ftp_server.databinding.ActivityMainBinding;
+import top.aenlly.ftp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
      * @param item 项目
      */
     public void toAuthorLink(MenuItem item) {
-        String url = "https://github.com/Aenlly/FTP-Server/tree/main";
+        String url = "https://github.com/Aenlly/Aenlly-FTP/releases";
         Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
         startActivity(intent);
     }

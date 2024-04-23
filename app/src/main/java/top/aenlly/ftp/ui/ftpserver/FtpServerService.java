@@ -1,4 +1,4 @@
-package top.aenlly.ftp_server.ui.ftpserver;
+package top.aenlly.ftp.ui.ftpserver;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
@@ -20,8 +20,8 @@ import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.ftpserver.usermanager.impl.WriteRequest;
-import top.aenlly.ftp_server.command.STOR;
-import top.aenlly.ftp_server.properties.FtpProperties;
+import top.aenlly.ftp.command.STOR;
+import top.aenlly.ftp.properties.FtpProperties;
 
 import java.util.LinkedList;
 import java.util.Map;

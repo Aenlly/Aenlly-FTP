@@ -1,11 +1,11 @@
-package top.aenlly.ftp_server.ui.ftpclient;
+package top.aenlly.ftp.ui.ftpclient;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
-import top.aenlly.ftp_server.R;
+import top.aenlly.ftp.R;
 
 /**
  * A simple {@link Fragment} subclass.

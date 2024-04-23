@@ -1,12 +1,12 @@
-package top.aenlly.ftp_server.utils.images;
+package top.aenlly.ftp.utils.images;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import lombok.extern.slf4j.Slf4j;
-import top.aenlly.ftp_server.constant.FtpConstant;
-import top.aenlly.ftp_server.properties.FtpProperties;
+import top.aenlly.ftp.constant.FtpConstant;
+import top.aenlly.ftp.properties.FtpProperties;
 import top.zibin.luban.InputStreamProvider;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;

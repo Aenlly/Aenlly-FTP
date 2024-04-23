@@ -1,4 +1,4 @@
-package top.aenlly.ftp_server.properties;
+package top.aenlly.ftp.properties;
 
 import lombok.Data;
 
