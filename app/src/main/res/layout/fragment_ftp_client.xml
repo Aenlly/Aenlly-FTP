@@ -4,11 +4,9 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="top.aenlly.ftp.ui.ftpclient.FtpClientFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="功能待完成"/>
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FTP client"
+            />
 
 </FrameLayout>

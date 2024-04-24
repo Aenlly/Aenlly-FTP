@@ -8,7 +8,7 @@ import lombok.Data;
  * @since 1.0.0
  */
 @Data
-public class FtpProperties {
+public class FtpServerProperties {
 
     public static String host;
     public static int port;

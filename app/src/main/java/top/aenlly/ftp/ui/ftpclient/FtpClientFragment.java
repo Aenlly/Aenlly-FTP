@@ -5,7 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+import org.apache.commons.net.ftp.FTPClient;
 import top.aenlly.ftp.R;
+import top.aenlly.ftp.properties.FtpClientProperties;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -13,6 +17,8 @@ import top.aenlly.ftp.R;
  * create an instance of this fragment.
  */
 public class FtpClientFragment extends Fragment {
+
+    private FTPClient ftpClient;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,5 +65,11 @@ public class FtpClientFragment extends Fragment {
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ftp_client, container, false);
+    }
+
+    void startFtpClient() throws IOException {
+        ftpClient = new FTPClient();
+        ftpClient.connect(FtpClientProperties.host,FtpClientProperties.port);
+        ftpClient.login(FtpClientProperties.username,FtpClientProperties.password);
     }
 }

@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import lombok.extern.slf4j.Slf4j;
 import top.aenlly.ftp.constant.FtpConstant;
-import top.aenlly.ftp.properties.FtpProperties;
+import top.aenlly.ftp.properties.FtpServerProperties;
 import top.zibin.luban.InputStreamProvider;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -118,7 +118,7 @@ public class ImageUtils {
         @Override
         public void onSuccess(File file) {
             // 刷新媒体管理，让图片/视频加入到媒体库中
-            if (FtpProperties.compressThumbState) {
+            if (FtpServerProperties.compressThumbState) {
                 MediaScannerConnection.scanFile(this.context,
                         new String[]{file.getParent()},
                         FtpConstant.FILE_FORMATS,

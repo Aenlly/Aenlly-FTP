@@ -8,7 +8,7 @@ import org.apache.ftpserver.ftplet.FtpRequest;
 import org.apache.ftpserver.impl.FtpIoSession;
 import org.apache.ftpserver.impl.FtpServerContext;
 import top.aenlly.ftp.constant.FtpConstant;
-import top.aenlly.ftp.properties.FtpProperties;
+import top.aenlly.ftp.properties.FtpServerProperties;
 import top.aenlly.ftp.utils.images.ImageUtils;
 
 import java.io.File;
@@ -43,10 +43,10 @@ public class STOR extends org.apache.ftpserver.command.impl.STOR {
                 new String[]{absolutePath},
                 FtpConstant.FILE_FORMATS,
                 (path, uri) -> {});
-        if (FtpProperties.compressState && FtpProperties.imageFormat !=null && Arrays.stream(FtpProperties.imageFormat)
+        if (FtpServerProperties.compressState && FtpServerProperties.imageFormat !=null && Arrays.stream(FtpServerProperties.imageFormat)
                 .anyMatch(absolutePath::endsWith)) {
             // 压缩图片
-            ImageUtils.syncCompress(this.context, file, FtpProperties.compressDir, new ImageUtils.DefaultOnCompressListener(this.context));
+            ImageUtils.syncCompress(this.context, file, FtpServerProperties.compressDir, new ImageUtils.DefaultOnCompressListener(this.context));
         }
     }
 }

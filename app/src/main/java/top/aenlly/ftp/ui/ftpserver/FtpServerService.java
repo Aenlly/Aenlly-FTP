@@ -21,7 +21,7 @@ import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.ftpserver.usermanager.impl.WriteRequest;
 import top.aenlly.ftp.command.STOR;
-import top.aenlly.ftp.properties.FtpProperties;
+import top.aenlly.ftp.properties.FtpServerProperties;
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -68,9 +68,9 @@ public class FtpServerService extends Service {
         UserManager userManager = userManagerFactory.createUserManager();
         // 设置用户/密码/目录
         BaseUser user = new BaseUser();
-        user.setName(FtpProperties.username);
-        user.setPassword(FtpProperties.password);
-        user.setHomeDirectory(FtpProperties.remoteDir);
+        user.setName(FtpServerProperties.username);
+        user.setPassword(FtpServerProperties.password);
+        user.setHomeDirectory(FtpServerProperties.remoteDir);
         user.authorize(new WriteRequest());
         LinkedList<Authority> authorities = new LinkedList<>();
         authorities.add(new WritePermission());
@@ -79,8 +79,8 @@ public class FtpServerService extends Service {
         serverFactory.setUserManager(userManager);
         // 创建监听器
         ListenerFactory factory = new ListenerFactory();
-        factory.setPort(FtpProperties.port);
-        factory.setServerAddress(FtpProperties.host);
+        factory.setPort(FtpServerProperties.port);
+        factory.setServerAddress(FtpServerProperties.host);
         // 向服务器添加监听器
         serverFactory.addListener("default", factory.createListener());
         // 重写命令执行

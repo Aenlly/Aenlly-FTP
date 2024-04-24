@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import top.aenlly.ftp.R;
 import top.aenlly.ftp.constant.CacheConstant;
 import top.aenlly.ftp.databinding.FragmentFtpServerBinding;
-import top.aenlly.ftp.properties.FtpProperties;
+import top.aenlly.ftp.properties.FtpServerProperties;
 import top.aenlly.ftp.utils.cache.SharedPreferencesUtils;
 
 import java.io.File;
@@ -52,7 +52,7 @@ public class FtpServerFragment extends Fragment {
             // 广播接收处理
             boolean isStart = intent.getBooleanExtra("success", false);
             if (isStart) {
-                binding.tvTooltip.setText("已启用:" + FtpProperties.host + ":" + FtpProperties.port);
+                binding.tvTooltip.setText("已启用:" + FtpServerProperties.host + ":" + FtpServerProperties.port);
                 binding.btnStart.setVisibility(View.GONE);
                 binding.btnStop.setVisibility(View.VISIBLE);
                 return;
@@ -188,17 +188,17 @@ public class FtpServerFragment extends Fragment {
      * init 属性
      */
     void initProperties() {
-        FtpProperties.username = binding.etUsername.getText().toString();
-        FtpProperties.password = binding.etPassword.getText().toString();
-        FtpProperties.port = Integer.parseInt(binding.etPort.getText().toString());
-        FtpProperties.remoteDir = binding.etDataDir.getText().toString();
-        FtpProperties.encoding = binding.etEncoding.getText().toString();
-        FtpProperties.host = getLocalIpAddress();
-        FtpProperties.compressDir = binding.etCompressDir.getText().toString();
-        FtpProperties.compressState = binding.rdgrpState.getCheckedRadioButtonId() == R.id.rdbtn_true;
-        FtpProperties.compressThumbState = binding.rdgrpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true;
+        FtpServerProperties.username = binding.etUsername.getText().toString();
+        FtpServerProperties.password = binding.etPassword.getText().toString();
+        FtpServerProperties.port = Integer.parseInt(binding.etPort.getText().toString());
+        FtpServerProperties.remoteDir = binding.etDataDir.getText().toString();
+        FtpServerProperties.encoding = binding.etEncoding.getText().toString();
+        FtpServerProperties.host = getLocalIpAddress();
+        FtpServerProperties.compressDir = binding.etCompressDir.getText().toString();
+        FtpServerProperties.compressState = binding.rdgrpState.getCheckedRadioButtonId() == R.id.rdbtn_true;
+        FtpServerProperties.compressThumbState = binding.rdgrpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true;
         String[] format = binding.etImageFormat.getText().toString().split(",");
-        FtpProperties.imageFormat = format.length != 0 && !binding.etImageFormat.getText().toString().isEmpty() ? format : null;
+        FtpServerProperties.imageFormat = format.length != 0 && !binding.etImageFormat.getText().toString().isEmpty() ? format : null;
         flushedCache();
     }
 
@@ -256,15 +256,15 @@ public class FtpServerFragment extends Fragment {
         //     binding.etEncoding.setError("请填写编码");
         //     return false;
         // }
-        if (FtpProperties.host == null) {
+        if (FtpServerProperties.host == null) {
             Toast.makeText(context, "请先打开热点！", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (FtpProperties.compressState && FtpProperties.compressDir.isEmpty()) {
+        if (FtpServerProperties.compressState && FtpServerProperties.compressDir.isEmpty()) {
             binding.etCompressDir.setError("压缩存储目录不能为空！");
             return false;
         }
-        if (FtpProperties.compressState && FtpProperties.imageFormat != null) {
+        if (FtpServerProperties.compressState && FtpServerProperties.imageFormat != null) {
             binding.etImageFormat.setError("压缩匹配格式不能为空！");
             return false;
         }
