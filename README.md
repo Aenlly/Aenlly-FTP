@@ -25,8 +25,8 @@ A simple android FTP tool, built using java Support android to enable FTP server
 
 ## Preview
 
-![Snipaste_2024-04-23_15-55-14.png](doc%2Fimages%2FSnipaste_2024-04-23_15-55-14.png)
-![Snipaste_2024-04-23_15-57-03.png](doc%2Fimages%2FSnipaste_2024-04-23_15-57-03.png)
+![Snipaste_2024-04-23_15-55-14.png](doc/images/Snipaste_2024-04-23_15-55-14.png)
+![Snipaste_2024-04-23_15-57-03.png](doc/images/Snipaste_2024-04-23_15-57-03.png)
 
 ## Usage
 

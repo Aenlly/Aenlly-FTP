@@ -252,10 +252,10 @@ public class FtpServerFragment extends Fragment {
             binding.etPort.setError("请填写端口");
             return false;
         }
-        if (binding.etEncoding.getText().toString().isEmpty()) {
-            binding.etEncoding.setError("请填写编码");
-            return false;
-        }
+        // if (binding.etEncoding.getText().toString().isEmpty()) {
+        //     binding.etEncoding.setError("请填写编码");
+        //     return false;
+        // }
         if (FtpProperties.host == null) {
             Toast.makeText(context, "请先打开热点！", Toast.LENGTH_SHORT).show();
             return false;
