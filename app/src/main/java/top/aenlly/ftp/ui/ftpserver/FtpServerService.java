@@ -68,6 +68,12 @@ public class FtpServerService extends Service {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
+        try {
+            startFtp();
+        } catch (FtpException e) {
+            throw new RuntimeException(e);
+        }
+
         Notification notification = new NotificationCompat.Builder(this, "ftp_service_channel_id")
                 .setContentTitle("FTP Server")
                 .setContentText(FtpServerProperties.host + ":" + FtpServerProperties.port + " 正在运行中...")
@@ -81,17 +87,13 @@ public class FtpServerService extends Service {
 
     @Override
     public void onCreate() {
-        try {
-            startFtp();
-        } catch (FtpException e) {
-            throw new RuntimeException(e);
-        }
         super.onCreate();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        server.stop();
     }
 
     @SuppressLint("ResourceAsColor")
