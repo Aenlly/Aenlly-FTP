@@ -56,6 +56,8 @@ public class FtpServerFragment extends Fragment {
                 return;
             }
             binding.tvTooltip.setText("启动失败：请检查端口是否被占用和配置是否已经填写完整");
+            Intent ftpIntent = new Intent(context, FtpServerService.class);
+            context.stopService(ftpIntent);
         }
     };
 
@@ -124,7 +126,7 @@ public class FtpServerFragment extends Fragment {
             binding.tvTooltip2.setText("需要开启热点使用");
         });
 
-        if( FtpServerProperties.host != null ){
+        if(FtpServerProperties.host != null ){
             startUp();
         }
     }
@@ -196,7 +198,9 @@ public class FtpServerFragment extends Fragment {
     void initProperties() {
         FtpServerProperties.username = binding.etUsername.getText().toString();
         FtpServerProperties.password = binding.etPassword.getText().toString();
-        FtpServerProperties.port = Integer.parseInt(binding.etPort.getText().toString());
+        if(binding.etPort.getText().length() > 0 ){
+            FtpServerProperties.port = Integer.parseInt(binding.etPort.getText().toString());
+        }
         FtpServerProperties.remoteDir = binding.etDataDir.getText().toString();
         FtpServerProperties.encoding = binding.etEncoding.getText().toString();
         FtpServerProperties.host = getLocalIpAddress();

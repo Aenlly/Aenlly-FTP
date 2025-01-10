@@ -1,11 +1,16 @@
 package top.aenlly.ftp.ui.ftpserver;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.pm.ServiceInfo;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ftpserver.FtpServer;
@@ -22,19 +27,17 @@ import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.apache.ftpserver.usermanager.impl.WriteRequest;
+import top.aenlly.ftp.R;
 import top.aenlly.ftp.command.STOR;
 import top.aenlly.ftp.properties.FtpServerProperties;
 
 import java.util.LinkedList;
 import java.util.Map;
+
 @Slf4j
 public class FtpServerService extends Service {
 
-    private static final String TAG = FtpServerService.class.getSimpleName();
-
     private FtpServer server;
-
-    private ServiceConnection mConnection;
 
     public FtpServerService() {
     }
@@ -55,7 +58,25 @@ public class FtpServerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+        // 实现前台进程保活
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "ftp_service_channel_id",
+                    "FTP Service Channel",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        Notification notification = new NotificationCompat.Builder(this, "ftp_service_channel_id")
+                .setContentTitle("FTP Server")
+                .setContentText(FtpServerProperties.host + ":" + FtpServerProperties.port + " 正在运行中...")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setOngoing(true)
+                .build();
+        startForeground(ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,notification);
+        log.info("FTP Server started");
+        return START_STICKY;
     }
 
     @Override
@@ -71,7 +92,6 @@ public class FtpServerService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        server.stop();
     }
 
     @SuppressLint("ResourceAsColor")
@@ -118,7 +138,6 @@ public class FtpServerService extends Service {
         try {
             server.start();
             success = true;
-            // refreshTheAlbum();
         } catch (FtpServerConfigurationException | FtpException e) {
             log.error("Failed to start",e);
         }
