@@ -45,6 +45,11 @@ public class SharedPreferencesUtils {
         return sharedPreferences.getBoolean(key,false);
     }
 
+    public static void removeValue(String key){
+        editor.remove(key);
+        editor.apply(); // 保存数据
+    }
+
     public static void clearData() {
         editor.clear(); // 清空所有数据
         editor.apply();

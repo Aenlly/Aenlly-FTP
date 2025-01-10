@@ -17,4 +17,7 @@ public interface CacheConstant {
     String COMPRESS_THUMB_STATE = "compress_thumb_state";
     String ENCODING = "encoding";
     String IMAGE_FORMAT = "image_format";
+    String IMAGE_MUL = "image_mul";
+
+    String START_STOP = "start_stop";
 }

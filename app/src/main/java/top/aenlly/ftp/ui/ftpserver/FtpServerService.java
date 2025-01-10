@@ -3,6 +3,8 @@ package top.aenlly.ftp.ui.ftpserver;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Binder;
 import android.os.IBinder;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import lombok.extern.slf4j.Slf4j;
@@ -28,25 +30,42 @@ import java.util.Map;
 @Slf4j
 public class FtpServerService extends Service {
 
+    private static final String TAG = FtpServerService.class.getSimpleName();
+
     private FtpServer server;
+
+    private ServiceConnection mConnection;
 
     public FtpServerService() {
     }
 
+    private final IBinder binder = new LocalBinder();
+
+    public class LocalBinder extends Binder {
+        FtpServerService getService() {
+            // 返回当前服务实例，允许客户端调用服务中的公共方法
+            return FtpServerService.this;
+        }
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return binder;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onCreate() {
-        super.onCreate();
         try {
             startFtp();
         } catch (FtpException e) {
             throw new RuntimeException(e);
         }
+        super.onCreate();
     }
 
     @Override
@@ -109,4 +128,5 @@ public class FtpServerService extends Service {
         intent.putExtra("success", success);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
+
 }

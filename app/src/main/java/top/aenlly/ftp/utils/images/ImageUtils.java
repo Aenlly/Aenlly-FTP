@@ -76,7 +76,7 @@ public class ImageUtils {
         BitmapFactory.decodeFile(path, options);
         options.inJustDecodeBounds = false;
         ////inSampleSize的作用就是可以把图片的长短缩小inSampleSize倍，所占内存缩小inSampleSize的平方
-        options.inSampleSize = computeSampleSize(options, 4000, 6000);
+        options.inSampleSize = computeSampleSize(options, Math.round(4000 * FtpServerProperties.imageMul), Math.round(6000 * FtpServerProperties.imageMul));
         return BitmapFactory.decodeFile(path, options); // 解码文件
     }
 

@@ -15,7 +15,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
+import top.aenlly.ftp.constant.CacheConstant;
 import top.aenlly.ftp.databinding.ActivityMainBinding;
+import top.aenlly.ftp.utils.cache.SharedPreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.appBarMain.toolbar);
 
         requestPermission();
-
+        resetCache();
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -75,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 3);
             }
         }
+    }
+
+    private void resetCache(){
+        SharedPreferencesUtils.removeValue(CacheConstant.START_STOP);
     }
 
     /**

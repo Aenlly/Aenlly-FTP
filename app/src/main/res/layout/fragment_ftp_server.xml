@@ -193,6 +193,25 @@
                             tools:layout_editor_absoluteX="109dp"
                     />
                 </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="压缩文件放大倍率:"
+                    />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:hint="默认为1(不放大压缩文件)"
+                        android:ems="10"
+                        android:id="@+id/et_image_mul"
+                        tools:layout_editor_absoluteY="260dp"
+                        tools:layout_editor_absoluteX="109dp"
+                    />
+                </LinearLayout>
                 <Button
                         android:text="启动"
                         android:layout_width="wrap_content"

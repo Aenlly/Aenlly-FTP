@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Debug;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +30,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+
 @Slf4j
 public class FtpServerFragment extends Fragment {
 
@@ -52,18 +52,22 @@ public class FtpServerFragment extends Fragment {
             // 广播接收处理
             boolean isStart = intent.getBooleanExtra("success", false);
             if (isStart) {
-                binding.tvTooltip.setText("已启用:" + FtpServerProperties.host + ":" + FtpServerProperties.port);
-                binding.btnStart.setVisibility(View.GONE);
-                binding.btnStop.setVisibility(View.VISIBLE);
+                startUp();
                 return;
             }
             binding.tvTooltip.setText("启动失败：请检查端口是否被占用和配置是否已经填写完整");
         }
     };
 
+    private void startUp() {
+        binding.tvTooltip.setText("已启用:" + FtpServerProperties.host + ":" + FtpServerProperties.port);
+        binding.btnStart.setVisibility(View.GONE);
+        binding.btnStop.setVisibility(View.VISIBLE);
+        binding.tvTooltip2.setText("");
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-
         binding = FragmentFtpServerBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
@@ -72,23 +76,22 @@ public class FtpServerFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         context = view.getContext();
         SharedPreferencesUtils.init(context);
         bindCache();
         registerForActivityResult();
         registerForBtn();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onStart() {
-        super.onStart();
         // 注册广播通知
         LocalBroadcastManager.getInstance(context).registerReceiver(ftpServerReceiver, new IntentFilter("ftp-server-service"));
+        super.onStart();
     }
 
     void registerForBtn() {
@@ -115,11 +118,16 @@ public class FtpServerFragment extends Fragment {
         binding.btnStop.setOnClickListener(view1 -> {
             context.stopService(ftpIntent);
             binding.tvTooltip.setText("未启用");
+            SharedPreferencesUtils.putString(CacheConstant.START_STOP, binding.btnStart.getText().toString());
             binding.btnStart.setVisibility(View.VISIBLE);
             binding.btnStop.setVisibility(View.GONE);
+            binding.tvTooltip2.setText("需要开启热点使用");
         });
-    }
 
+        if( FtpServerProperties.host != null ){
+            startUp();
+        }
+    }
 
     /**
      * 注册查看活动结果，用于选择目录并填充路径到组件上显示，避免使用者输入错误
@@ -170,16 +178,14 @@ public class FtpServerFragment extends Fragment {
                 Enumeration<InetAddress> enumInetAddress = networkInterface.getInetAddresses();
                 while (enumInetAddress.hasMoreElements()) {
                     InetAddress inetAddress = enumInetAddress.nextElement();
-                    // debug时使用10.9，实际应用使用192.168
-                    if (!inetAddress.isLoopbackAddress() && inetAddress.getAddress().length == 4 && inetAddress.toString()
-                            .contains(Debug.isDebuggerConnected() ? "10.9" : "192.168")) {
+                    if (!inetAddress.isLoopbackAddress() && inetAddress.getAddress().length == 4) {
                         // 找到了IPv4地址
                         return inetAddress.getHostAddress();
                     }
                 }
             }
         } catch (SocketException ex) {
-            log.error("SocketException:{}",ex);
+            log.error("SocketException: ",ex);
         }
         return null;
     }
@@ -199,6 +205,7 @@ public class FtpServerFragment extends Fragment {
         FtpServerProperties.compressThumbState = binding.rdgrpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true;
         String[] format = binding.etImageFormat.getText().toString().split(",");
         FtpServerProperties.imageFormat = format.length != 0 && !binding.etImageFormat.getText().toString().isEmpty() ? format : null;
+        FtpServerProperties.imageMul = binding.etEncoding.getText().toString().isEmpty()? 1 : Float.parseFloat(binding.etImageFormat.getText().toString());
         flushedCache();
     }
 
@@ -217,6 +224,7 @@ public class FtpServerFragment extends Fragment {
         binding.rdgrpState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_STATE) ? R.id.rdbtn_true : R.id.rdbtn_false);
         binding.rdgrpThumbState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_THUMB_STATE) ? R.id.rdbtn_thumb_true : R.id.rdbtn_thumb_false);
         binding.etImageFormat.setText(SharedPreferencesUtils.getString(CacheConstant.IMAGE_FORMAT));
+        binding.etImageMul.setText(SharedPreferencesUtils.getString(CacheConstant.IMAGE_MUL));
     }
 
     /**
@@ -230,9 +238,9 @@ public class FtpServerFragment extends Fragment {
         SharedPreferencesUtils.putString(CacheConstant.ENCODING, binding.etEncoding.getText().toString());
         SharedPreferencesUtils.putString(CacheConstant.COMPRESS_DIR, binding.etCompressDir.getText().toString());
         SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_STATE, binding.rdgrpState.getCheckedRadioButtonId() == R.id.rdbtn_true);
-        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_THUMB_STATE,
-                binding.rdgrpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true);
+        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_THUMB_STATE, binding.rdgrpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true);
         SharedPreferencesUtils.putString(CacheConstant.IMAGE_FORMAT, binding.etImageFormat.getText().toString());
+        SharedPreferencesUtils.putString(CacheConstant.IMAGE_MUL, binding.etImageMul.getText().toString());
     }
 
     boolean verifyParameter() {
@@ -264,7 +272,7 @@ public class FtpServerFragment extends Fragment {
             binding.etCompressDir.setError("压缩存储目录不能为空！");
             return false;
         }
-        if (FtpServerProperties.compressState && FtpServerProperties.imageFormat != null) {
+        if (FtpServerProperties.compressState && FtpServerProperties.imageFormat == null) {
             binding.etImageFormat.setError("压缩匹配格式不能为空！");
             return false;
         }
