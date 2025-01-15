@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="top.aenlly.ftp.ui.ftpclient.FtpClientFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:ignore="MissingConstraints">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="启动配置"
+                />
+                <RadioGroup android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:id="@+id/rdrgp_client_connect">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="连接方式:"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_ftp"
+                                 android:text="ftp"
+                                 android:checked="true"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_sftp"
+                                 android:text="sftp"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_sftp"
+                                 android:text="ftps"
+                    />
+                </RadioGroup>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="地址:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="请输入服务器地址"
+                            android:ems="10"
+                            android:id="@+id/et_client_host"
+                            android:importantForAccessibility="yes"
+                            tools:layout_editor_absoluteY="260dp"
+                            tools:layout_editor_absoluteX="109dp"
+                    />
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="端口:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="端口"
+                            android:ems="10"
+                            android:id="@+id/et_client_port"
+                            tools:layout_editor_absoluteY="185dp"
+                            tools:layout_editor_absoluteX="100dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="账号:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:hint="请填写账号"
+                            android:ems="10"
+                            android:id="@+id/et_client_username"
+                            tools:layout_editor_absoluteY="89dp"
+                            tools:layout_editor_absoluteX="112dp"
+                            android:minHeight="48dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="密码:"
+                    />
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:hint="请填写密码"
+                            android:ems="10"
+                            android:id="@+id/et_client_password"
+                            tools:layout_editor_absoluteY="108dp"
+                            tools:layout_editor_absoluteX="60dp"/>
+                </LinearLayout>
+                <RadioGroup android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:id="@+id/rdrgp_client_mod">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="传输模式:"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_false"
+                                 android:text="主动"
+                                 android:checked="true"
+                    />
+                    <RadioButton android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:id="@+id/rdbtn_true"
+                                 android:text="被动"
+                    />
+                </RadioGroup>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="UTF-8"
+                        android:hint="编码"
+                        android:ems="10"
+                        android:id="@+id/et_client_encoding"
+                        android:visibility="gone"
+                        tools:layout_editor_absoluteY="230dp"
+                        tools:layout_editor_absoluteX="60dp"/>
+
+                <Button
+                        android:text="确认"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_client_start"
+                        android:backgroundTint="@color/blue"
+                        tools:layout_editor_absoluteY="299dp"
+                        android:layout_gravity="bottom|center"
+                        tools:layout_editor_absoluteX="70dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

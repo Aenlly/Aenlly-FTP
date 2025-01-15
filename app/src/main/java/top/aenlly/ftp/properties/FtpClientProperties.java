@@ -9,15 +9,33 @@ import lombok.Data;
  */
 @Data
 public class FtpClientProperties {
-
+    /**
+     * 远程地址
+     */
     public static String host;
+    /**
+     * 端口
+     */
     public static int port;
+    /**
+     * 传输模式
+     */
+    public static String mode;
+    /**
+     * 连接模式，ftp,sftp,ftps
+     */
+    public static String connect;
+    /**
+     * 账号
+     */
     public static String username;
+    /**
+     * 密码
+     */
     public static String password;
-    public static String remoteDir; // 远程目录
-    public static String compressDir; // 压缩地址
-    public static boolean compressState; // 压缩状态，是否启用
-    public static boolean compressThumbState; // 略缩图状态，是否启用
-    public static String encoding; // 字符编码
-    public static String[] imageFormat; // 压缩匹配格式
+    /**
+     * 字符编码,可以先默认UTF-8,后续再加
+     */
+    public static String encoding;
+
 }
