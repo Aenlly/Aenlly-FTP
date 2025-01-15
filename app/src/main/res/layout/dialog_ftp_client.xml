@@ -32,18 +32,18 @@
                     />
                     <RadioButton android:layout_width="wrap_content"
                                  android:layout_height="wrap_content"
-                                 android:id="@+id/rdbtn_ftp"
+                                 android:id="@+id/rdbtn_client_ftp"
                                  android:text="ftp"
                                  android:checked="true"
                     />
                     <RadioButton android:layout_width="wrap_content"
                                  android:layout_height="wrap_content"
-                                 android:id="@+id/rdbtn_sftp"
+                                 android:id="@+id/rdbtn_client_sftp"
                                  android:text="sftp"
                     />
                     <RadioButton android:layout_width="wrap_content"
                                  android:layout_height="wrap_content"
-                                 android:id="@+id/rdbtn_ftps"
+                                 android:id="@+id/rdbtn_client_ftps"
                                  android:text="ftps"
                     />
                 </RadioGroup>
@@ -134,13 +134,13 @@
                     />
                     <RadioButton android:layout_width="wrap_content"
                                  android:layout_height="wrap_content"
-                                 android:id="@+id/rdbtn_false"
+                                 android:id="@+id/rdbtn_client_master"
                                  android:text="主动"
                                  android:checked="true"
                     />
                     <RadioButton android:layout_width="wrap_content"
                                  android:layout_height="wrap_content"
-                                 android:id="@+id/rdbtn_true"
+                                 android:id="@+id/rdbtn_client_slave"
                                  android:text="被动"
                     />
                 </RadioGroup>

@@ -205,8 +205,8 @@ public class FtpServerFragment extends Fragment {
         FtpServerProperties.encoding = binding.etEncoding.getText().toString();
         FtpServerProperties.host = getLocalIpAddress();
         FtpServerProperties.compressDir = binding.etCompressDir.getText().toString();
-        FtpServerProperties.compressState = binding.rdgrpState.getCheckedRadioButtonId() == R.id.rdbtn_true;
-        FtpServerProperties.compressThumbState = binding.rdgrpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true;
+        FtpServerProperties.compressState = binding.rdrgpState.getCheckedRadioButtonId() == R.id.rdbtn_true;
+        FtpServerProperties.compressThumbState = binding.rdrgpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true;
         String[] format = binding.etImageFormat.getText().toString().split(",");
         FtpServerProperties.imageFormat = format.length != 0 && !binding.etImageFormat.getText().toString().isEmpty() ? format : null;
         FtpServerProperties.imageMul = binding.etEncoding.getText().toString().isEmpty()? 1 : Float.parseFloat(binding.etImageFormat.getText().toString());
@@ -225,8 +225,8 @@ public class FtpServerFragment extends Fragment {
         binding.etPassword.setText(SharedPreferencesUtils.getString(CacheConstant.PASSWORD));
         binding.etEncoding.setText(SharedPreferencesUtils.getString(CacheConstant.ENCODING));
         binding.etCompressDir.setText(SharedPreferencesUtils.getString(CacheConstant.COMPRESS_DIR));
-        binding.rdgrpState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_STATE) ? R.id.rdbtn_true : R.id.rdbtn_false);
-        binding.rdgrpThumbState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_THUMB_STATE) ? R.id.rdbtn_thumb_true : R.id.rdbtn_thumb_false);
+        binding.rdrgpState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_STATE) ? R.id.rdbtn_true : R.id.rdbtn_false);
+        binding.rdrgpThumbState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_THUMB_STATE) ? R.id.rdbtn_thumb_true : R.id.rdbtn_thumb_false);
         binding.etImageFormat.setText(SharedPreferencesUtils.getString(CacheConstant.IMAGE_FORMAT));
         binding.etImageMul.setText(SharedPreferencesUtils.getString(CacheConstant.IMAGE_MUL));
     }
@@ -241,8 +241,8 @@ public class FtpServerFragment extends Fragment {
         SharedPreferencesUtils.putString(CacheConstant.PASSWORD, binding.etPassword.getText().toString());
         SharedPreferencesUtils.putString(CacheConstant.ENCODING, binding.etEncoding.getText().toString());
         SharedPreferencesUtils.putString(CacheConstant.COMPRESS_DIR, binding.etCompressDir.getText().toString());
-        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_STATE, binding.rdgrpState.getCheckedRadioButtonId() == R.id.rdbtn_true);
-        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_THUMB_STATE, binding.rdgrpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true);
+        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_STATE, binding.rdrgpState.getCheckedRadioButtonId() == R.id.rdbtn_true);
+        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_THUMB_STATE, binding.rdrgpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true);
         SharedPreferencesUtils.putString(CacheConstant.IMAGE_FORMAT, binding.etImageFormat.getText().toString());
         SharedPreferencesUtils.putString(CacheConstant.IMAGE_MUL, binding.etImageMul.getText().toString());
     }
