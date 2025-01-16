@@ -21,6 +21,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import lombok.extern.slf4j.Slf4j;
 import top.aenlly.ftp.R;
 import top.aenlly.ftp.constant.CacheConstant;
+import top.aenlly.ftp.constant.FtpConstant;
 import top.aenlly.ftp.databinding.FragmentFtpServerBinding;
 import top.aenlly.ftp.properties.FtpServerProperties;
 import top.aenlly.ftp.utils.cache.SharedPreferencesUtils;
@@ -82,7 +83,7 @@ public class FtpServerFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         context = view.getContext();
-        SharedPreferencesUtils.init(context);
+        SharedPreferencesUtils.init(FtpConstant.FTP_SERVER,context);
         bindCache();
         registerForActivityResult();
         registerForBtn();
@@ -120,7 +121,7 @@ public class FtpServerFragment extends Fragment {
         binding.btnStop.setOnClickListener(view1 -> {
             context.stopService(ftpIntent);
             binding.tvTooltip.setText("未启用");
-            SharedPreferencesUtils.putString(CacheConstant.START_STOP, binding.btnStart.getText().toString());
+            SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.START_STOP, binding.btnStart.getText().toString());
             binding.btnStart.setVisibility(View.VISIBLE);
             binding.btnStop.setVisibility(View.GONE);
             binding.tvTooltip2.setText("需要开启热点使用");
@@ -219,32 +220,32 @@ public class FtpServerFragment extends Fragment {
     @SuppressLint("ResourceAsColor")
     void bindCache() {
         binding.btnStart.setBackgroundColor(R.color.blue);
-        binding.etPort.setText(SharedPreferencesUtils.getString(CacheConstant.PORT));
-        binding.etDataDir.setText(SharedPreferencesUtils.getString(CacheConstant.UPLOAD_DIR));
-        binding.etUsername.setText(SharedPreferencesUtils.getString(CacheConstant.USER_NAME));
-        binding.etPassword.setText(SharedPreferencesUtils.getString(CacheConstant.PASSWORD));
-        binding.etEncoding.setText(SharedPreferencesUtils.getString(CacheConstant.ENCODING));
-        binding.etCompressDir.setText(SharedPreferencesUtils.getString(CacheConstant.COMPRESS_DIR));
-        binding.rdrgpState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_STATE) ? R.id.rdbtn_true : R.id.rdbtn_false);
-        binding.rdrgpThumbState.check(SharedPreferencesUtils.getBoolean(CacheConstant.COMPRESS_THUMB_STATE) ? R.id.rdbtn_thumb_true : R.id.rdbtn_thumb_false);
-        binding.etImageFormat.setText(SharedPreferencesUtils.getString(CacheConstant.IMAGE_FORMAT));
-        binding.etImageMul.setText(SharedPreferencesUtils.getString(CacheConstant.IMAGE_MUL));
+        binding.etPort.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.PORT));
+        binding.etDataDir.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.UPLOAD_DIR));
+        binding.etUsername.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.USER_NAME));
+        binding.etPassword.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.PASSWORD));
+        binding.etEncoding.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.ENCODING));
+        binding.etCompressDir.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.COMPRESS_DIR));
+        binding.rdrgpState.check(SharedPreferencesUtils.getBoolean(FtpConstant.FTP_SERVER,CacheConstant.COMPRESS_STATE) ? R.id.rdbtn_true : R.id.rdbtn_false);
+        binding.rdrgpThumbState.check(SharedPreferencesUtils.getBoolean(FtpConstant.FTP_SERVER,CacheConstant.COMPRESS_THUMB_STATE) ? R.id.rdbtn_thumb_true : R.id.rdbtn_thumb_false);
+        binding.etImageFormat.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.IMAGE_FORMAT));
+        binding.etImageMul.setText(SharedPreferencesUtils.getString(FtpConstant.FTP_SERVER,CacheConstant.IMAGE_MUL));
     }
 
     /**
      * 刷新缓存
      */
     void flushedCache() {
-        SharedPreferencesUtils.putString(CacheConstant.PORT, binding.etPort.getText().toString());
-        SharedPreferencesUtils.putString(CacheConstant.UPLOAD_DIR, binding.etDataDir.getText().toString());
-        SharedPreferencesUtils.putString(CacheConstant.USER_NAME, binding.etUsername.getText().toString());
-        SharedPreferencesUtils.putString(CacheConstant.PASSWORD, binding.etPassword.getText().toString());
-        SharedPreferencesUtils.putString(CacheConstant.ENCODING, binding.etEncoding.getText().toString());
-        SharedPreferencesUtils.putString(CacheConstant.COMPRESS_DIR, binding.etCompressDir.getText().toString());
-        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_STATE, binding.rdrgpState.getCheckedRadioButtonId() == R.id.rdbtn_true);
-        SharedPreferencesUtils.putBoolean(CacheConstant.COMPRESS_THUMB_STATE, binding.rdrgpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true);
-        SharedPreferencesUtils.putString(CacheConstant.IMAGE_FORMAT, binding.etImageFormat.getText().toString());
-        SharedPreferencesUtils.putString(CacheConstant.IMAGE_MUL, binding.etImageMul.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.PORT, binding.etPort.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.UPLOAD_DIR, binding.etDataDir.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.USER_NAME, binding.etUsername.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.PASSWORD, binding.etPassword.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.ENCODING, binding.etEncoding.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.COMPRESS_DIR, binding.etCompressDir.getText().toString());
+        SharedPreferencesUtils.putBoolean(FtpConstant.FTP_SERVER,CacheConstant.COMPRESS_STATE, binding.rdrgpState.getCheckedRadioButtonId() == R.id.rdbtn_true);
+        SharedPreferencesUtils.putBoolean(FtpConstant.FTP_SERVER,CacheConstant.COMPRESS_THUMB_STATE, binding.rdrgpThumbState.getCheckedRadioButtonId() == R.id.rdbtn_thumb_true);
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.IMAGE_FORMAT, binding.etImageFormat.getText().toString());
+        SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.IMAGE_MUL, binding.etImageMul.getText().toString());
     }
 
     boolean verifyParameter() {

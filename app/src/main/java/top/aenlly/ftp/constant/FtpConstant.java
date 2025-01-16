@@ -18,4 +18,7 @@ public interface FtpConstant {
     String[] FILE_FORMATS = Stream.concat(Arrays.stream(FtpConstant.IMAGE_FORMATS), Arrays.stream(FtpConstant.VIDEO_FORMATS))
             .toArray(String[]::new);
 
+    String FTP_SERVER = "ftp-server";
+    String FTP_CLIENT = "ftp-client";
+
 }
