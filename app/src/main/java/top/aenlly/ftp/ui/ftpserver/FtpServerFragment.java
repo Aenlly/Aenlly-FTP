@@ -111,10 +111,10 @@ public class FtpServerFragment extends Fragment {
 
         Intent ftpIntent = new Intent(context, FtpServerService.class);
         binding.btnStart.setOnClickListener(view1 -> {
-            initProperties();
             if (!verifyParameter()) {
                 return;
             }
+            initProperties();
             context.startService(ftpIntent);
         });
 

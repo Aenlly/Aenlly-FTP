@@ -22,6 +22,7 @@ public class FtpClientService  extends Service {
     private static final String FTP_CONNECT="ftp";
     private static final String SFTP_CONNECT="sftp";
     private static final String FTPS_CONNECT="ftps";
+    public static final String MASTER="master";
 
     public class LocalBinder extends Binder {
         FtpClientService getService() {
@@ -76,6 +77,13 @@ public class FtpClientService  extends Service {
                 break;
             default:
         }
+        // 传输模式
+        if(FtpClientProperties.mode){
+            ftpClient.enterLocalActiveMode();
+        }else{
+            ftpClient.enterLocalPassiveMode();
+        }
+
         ftpClient.setControlEncoding(FtpClientProperties.encoding);
         ftpClient.connect(FtpClientProperties.host, FtpClientProperties.port);
         ftpClient.login(FtpClientProperties.username, FtpClientProperties.password);

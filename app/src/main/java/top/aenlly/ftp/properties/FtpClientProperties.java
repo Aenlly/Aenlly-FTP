@@ -20,7 +20,7 @@ public class FtpClientProperties {
     /**
      * 传输模式
      */
-    public static String mode;
+    public static Boolean mode;
     /**
      * 连接模式，ftp,sftp,ftps
      */
