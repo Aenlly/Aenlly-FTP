@@ -61,9 +61,7 @@ public class FtpClientDialog extends Dialog {
     void initProperties() {
         FtpClientProperties.username = binding.etClientUsername.getText().toString();
         FtpClientProperties.password = binding.etClientPassword.getText().toString();
-        if(binding.etClientPort.getText().length() > 0 ){
-            FtpClientProperties.port = Integer.parseInt(binding.etClientPort.getText().toString());
-        }
+        FtpClientProperties.port = Integer.parseInt(binding.etClientPort.getText().toString());
         FtpClientProperties.host = binding.etClientHost.getText().toString();
         FtpClientProperties.encoding = binding.etClientEncoding.getText().toString();
         FtpClientProperties.connect = ((RadioButton)findViewById(binding.rdrgpClientConnect.getCheckedRadioButtonId())).getText().toString();

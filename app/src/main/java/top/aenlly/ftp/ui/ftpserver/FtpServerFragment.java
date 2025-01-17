@@ -198,9 +198,7 @@ public class FtpServerFragment extends Fragment {
     void initProperties() {
         FtpServerProperties.username = binding.etUsername.getText().toString();
         FtpServerProperties.password = binding.etPassword.getText().toString();
-        if(binding.etPort.getText().length() > 0 ){
-            FtpServerProperties.port = Integer.parseInt(binding.etPort.getText().toString());
-        }
+        FtpServerProperties.port = Integer.parseInt(binding.etPort.getText().toString());
         FtpServerProperties.remoteDir = binding.etDataDir.getText().toString();
         FtpServerProperties.encoding = binding.etEncoding.getText().toString();
         FtpServerProperties.host = getLocalIpAddress();
@@ -268,15 +266,16 @@ public class FtpServerFragment extends Fragment {
         //     binding.etEncoding.setError("请填写编码");
         //     return false;
         // }
-        if (FtpServerProperties.host == null) {
+        if (getLocalIpAddress() == null) {
             Toast.makeText(context, "请先打开热点！", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (FtpServerProperties.compressState && FtpServerProperties.compressDir.isEmpty()) {
+        boolean compressState = binding.rdrgpState.getCheckedRadioButtonId() == R.id.rdbtn_true;
+        if (compressState && binding.etCompressDir.getText().toString().isEmpty()) {
             binding.etCompressDir.setError("压缩存储目录不能为空！");
             return false;
         }
-        if (FtpServerProperties.compressState && FtpServerProperties.imageFormat == null) {
+        if (compressState && binding.etImageFormat.getText().toString().isEmpty()) {
             binding.etImageFormat.setError("压缩匹配格式不能为空！");
             return false;
         }
