@@ -121,7 +121,6 @@ public class FtpServerFragment extends Fragment {
         binding.btnStop.setOnClickListener(view1 -> {
             context.stopService(ftpIntent);
             binding.tvTooltip.setText("未启用");
-            SharedPreferencesUtils.putString(FtpConstant.FTP_SERVER,CacheConstant.START_STOP, binding.btnStart.getText().toString());
             binding.btnStart.setVisibility(View.VISIBLE);
             binding.btnStop.setVisibility(View.GONE);
             binding.tvTooltip2.setText("需要开启热点使用");
