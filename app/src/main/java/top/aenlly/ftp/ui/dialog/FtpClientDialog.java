@@ -22,6 +22,7 @@ public class FtpClientDialog extends Dialog {
 
     public FtpClientDialog(@NonNull Context context) {
         super(context);
+        this.context = context;
         LayoutInflater inflater = LayoutInflater.from(context);
         binding = DialogFtpClientBinding.inflate(inflater, null, false);
         SharedPreferencesUtils.init(FtpConstant.FTP_CLIENT,context);

@@ -2,17 +2,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context="top.aenlly.ftp.ui.ftpclient.FtpClientFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:padding="16dp">
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="0px"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="right"
                 tools:ignore="MissingConstraints">
             <Button
                     android:text="新建"
@@ -21,7 +24,6 @@
                     android:id="@+id/btn_client_new"
                     android:backgroundTint="@color/red"
                     tools:layout_editor_absoluteY="299dp"
-                    android:layout_gravity="bottom|center"
                     tools:layout_editor_absoluteX="70dp"/>
         </LinearLayout>
         <LinearLayout
@@ -32,55 +34,61 @@
             <!-- 内容 -->
         </LinearLayout>
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="0px"
+                android:layout_alignParentBottom="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="MissingConstraints">
-            <Button
+            <TextView
                     android:text="全选"
+                    android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_all"
                     android:backgroundTint="@color/black"
+                    android:layout_weight="1"
                     tools:layout_editor_absoluteY="299dp"
-                    android:layout_gravity="bottom|center"
                     tools:layout_editor_absoluteX="70dp"/>
-            <Button
+            <TextView
                     android:text="取消全选"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_unall"
                     android:backgroundTint="@color/red"
                     tools:layout_editor_absoluteY="299dp"
-                    android:layout_gravity="bottom|center"
                     tools:layout_editor_absoluteX="70dp"/>
-            <Button
+            <TextView
                     android:text="复制"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_copy"
                     android:backgroundTint="@color/black"
                     tools:layout_editor_absoluteY="299dp"
-                    android:layout_gravity="bottom|center"
                     tools:layout_editor_absoluteX="70dp"/>
-            <Button
+            <TextView
                     android:text="移动"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_move"
                     android:backgroundTint="@color/black"
                     tools:layout_editor_absoluteY="299dp"
-                    android:layout_gravity="bottom|center"
                     tools:layout_editor_absoluteX="70dp"/>
-            <Button
+            <TextView
                     android:text="删除"
+                    android:gravity="center"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_del"
                     android:backgroundTint="@color/black"
                     tools:layout_editor_absoluteY="299dp"
-                    android:layout_gravity="bottom|center"
                     tools:layout_editor_absoluteX="70dp"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
