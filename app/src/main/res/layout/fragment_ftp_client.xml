@@ -31,11 +31,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints">
-            <!-- 内容 -->
+            <ListView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/lv_client_list">
+            </ListView>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -47,9 +50,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_all"
                     android:backgroundTint="@color/black"
-                    android:layout_weight="1"
-                    tools:layout_editor_absoluteY="299dp"
-                    tools:layout_editor_absoluteX="70dp"/>
+                    android:layout_weight="1"/>
             <TextView
                     android:text="取消全选"
                     android:gravity="center"
@@ -57,9 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_unall"
-                    android:backgroundTint="@color/red"
-                    tools:layout_editor_absoluteY="299dp"
-                    tools:layout_editor_absoluteX="70dp"/>
+                    android:backgroundTint="@color/red"/>
             <TextView
                     android:text="复制"
                     android:gravity="center"
@@ -67,9 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_copy"
-                    android:backgroundTint="@color/black"
-                    tools:layout_editor_absoluteY="299dp"
-                    tools:layout_editor_absoluteX="70dp"/>
+                    android:backgroundTint="@color/black"/>
             <TextView
                     android:text="移动"
                     android:gravity="center"
@@ -77,9 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_move"
-                    android:backgroundTint="@color/black"
-                    tools:layout_editor_absoluteY="299dp"
-                    tools:layout_editor_absoluteX="70dp"/>
+                    android:backgroundTint="@color/black"/>
             <TextView
                     android:text="删除"
                     android:gravity="center"
@@ -87,9 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_client_opt_del"
-                    android:backgroundTint="@color/black"
-                    tools:layout_editor_absoluteY="299dp"
-                    tools:layout_editor_absoluteX="70dp"/>
+                    android:backgroundTint="@color/black"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
